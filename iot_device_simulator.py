@@ -1,5 +1,7 @@
 """
 A temporary script to simulate an FOV Tablet and send similar messages to a topic.
+
+What do our devices do? What information do they send to which topics at what frequency?
 """
 import dotenv
 import json
