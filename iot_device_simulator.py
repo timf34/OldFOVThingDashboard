@@ -16,6 +16,7 @@ PRIVATE_KEY_PATH = "aws-iot-certs/fov-dashboard-client-dublin-1-private.pem.key"
 ROOT_CA_PATH = "aws-iot-certs/AmazonRootCA1.pem"
 ENDPOINT = "a3lkzcadhi1yzr-ats.iot.eu-west-1.amazonaws.com"
 
+
 def initialize_iot_manager() -> IOTClient:
 
     cwd = os.getcwd()
@@ -38,8 +39,11 @@ def main():
     iot_client = initialize_iot_manager()
     iot_client.connect()
 
+    iot_client.publish(topic="ap-southeast-2/marvel/fov-marvel-tablet-1/version", payload=json.dumps("1.1.0"))
+
     while True:
-        iot_client.publish(payload=json.dumps("Hello from FOV Tablet Simulator"))
+        iot_client.publish(topic="ap-southeast-2/marvel/fov-marvel-tablet-1/temperature", payload=json.dumps("Temperature: 52"))
+        iot_client.publish(topic="ap-southeast-2/marvel/fov-marvel-tablet-1/battery", payload=json.dumps("Battery Percentage: 80"))
         time.sleep(5)
 
 
