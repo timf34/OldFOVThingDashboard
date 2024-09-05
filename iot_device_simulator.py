@@ -6,6 +6,7 @@ What do our devices do? What information do they send to which topics at what fr
 import dotenv
 import json
 import os
+import random
 import time
 
 from aws_iot.IOTClient import IOTClient
@@ -42,8 +43,10 @@ def main():
     iot_client.publish(topic="ap-southeast-2/marvel/fov-marvel-tablet-1/version", payload=json.dumps("1.1.0"))
 
     while True:
-        iot_client.publish(topic="ap-southeast-2/marvel/fov-marvel-tablet-1/temperature", payload=json.dumps("Temperature: 52"))
-        iot_client.publish(topic="ap-southeast-2/marvel/fov-marvel-tablet-1/battery", payload=json.dumps("Battery Percentage: 80"))
+        temperature = random.randint(50, 100)
+        battery = random.randint(0, 100)
+        iot_client.publish(topic="ap-southeast-2/marvel/fov-marvel-tablet-1/temperature", payload=json.dumps(f"Temperature: {temperature}"))
+        iot_client.publish(topic="ap-southeast-2/marvel/fov-marvel-tablet-1/battery", payload=json.dumps(f"Battery Percentage: {battery}"))
         time.sleep(5)
 
 
